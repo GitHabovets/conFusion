@@ -1,1 +1,8 @@
-ng serve --open
+NG Live Development Server: 
+	ng serve --open
+
+Git commands:
+	git init
+	git add .
+	git commit -m "Comments"
+	git push -u
