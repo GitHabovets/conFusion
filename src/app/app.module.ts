@@ -53,6 +53,6 @@ import { MenuComponent } from './menu/menu.component';
     MatDialogModule    
   ],
   providers: [],
-  bootstrap: [AppComponent,MenuComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
