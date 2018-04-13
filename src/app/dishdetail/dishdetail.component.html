@@ -1,5 +1,6 @@
 <!-- Have to address the class="container" error-->
-<div class=""
+
+<div class="container"
     fxLayout="row"
     fxLayout.sm="column"
     fxLayout.xs="column"
@@ -29,10 +30,13 @@
   </div>
 
   <div fxFlex="40">
-    <div fxFlex>
+    <div fxFlex *ngIf="comments">
+      <h3>Comments</h3>
       <mat-list cols="2" rowHeight="200px">
         <mat-list-item *ngFor="let comment of comments">
-            <h1 mat-line>{{comment.comment | uppercase}}</h1>
+            <p matLine>{{comment.comment}}</p>
+            <p matLine>{{comment.rating}}</p>
+            <p matLine> -- {{comment.author}} {{comment.date | date:'longDate'}}</p>
         </mat-list-item>
       </mat-list>
     </div>    
