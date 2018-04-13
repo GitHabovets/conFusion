@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Dish } from '../shared/dish';
 
+/*
 const DISH = {
   name: 'Uthappizza',
   image: '/assets/images/uthappizza.png',
@@ -40,6 +42,7 @@ const DISH = {
     }
   ]
 };
+*/
 
 @Component({
   selector: 'app-dishdetail',
@@ -48,9 +51,10 @@ const DISH = {
 })
 export class DishdetailComponent implements OnInit {
 
-  dish = DISH;
+  @Input()
+  dish = Dish;
 
-  comments = DISH.comments;
+  //comments = dish.comments;
 
   constructor() { }
 
