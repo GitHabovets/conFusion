@@ -28,6 +28,7 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
 
 import { DishService } from '../app/services/dish.service';
 import { PromotionService } from '../app/services/promotion.service';
+import  { LeaderService } from '../app/services/leader.service';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -73,7 +74,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     //HttpModule,
     AppRoutingModule
   ],
-  providers: [DishService, PromotionService],
+  providers: [DishService, PromotionService, LeaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
