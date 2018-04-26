@@ -22,6 +22,8 @@ import {  MatButtonModule,
           MatDialogModule 
         } from '@angular/material';
 
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
@@ -38,7 +40,7 @@ import { ContactComponent } from './contact/contact.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -65,7 +67,7 @@ import { FormsModule } from '@angular/forms';
     MatRadioModule, 
     MatSelectModule, 
     //MatSliderModule,
-    //MatSlideToggleModule, 
+    MatSlideToggleModule, 
     MatToolbarModule, 
     MatListModule, 
     MatGridListModule,
@@ -76,7 +78,8 @@ import { FormsModule } from '@angular/forms';
     //FormsModule,
     //HttpModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [LoginComponent],
   providers: [DishService, PromotionService, LeaderService],
