@@ -123,7 +123,8 @@ export class DishdetailComponent implements OnInit {
   }
 
   onSubmit() {
-    this.feedBack = this.feedbackForm.value;
+    //this.feedBack = this.feedbackForm.value;
+    this.comment = this.commentForm.value;
     console.log(this.comment);
     /*this.feedbackForm.reset({
       firstname: '',
@@ -135,13 +136,10 @@ export class DishdetailComponent implements OnInit {
       message: ''
     });*/
     this.commentForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: '',
-      email: '',
-      agree: false,
-      contacttype: 'None',
-      message: ''
+      author: '',
+      comment: '',
+      rating: 5,
+      date: ''
     });
   }
 

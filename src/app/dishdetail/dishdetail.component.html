@@ -120,9 +120,14 @@
               <span [hidden]="!(formErrors.author)">
                 {{formErrors.author}}</span>
             </mat-hint>
-          </mat-input-container><p>
+          </mat-input-container>
+        <p>
           <mat-input-container class="full-width">
             <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+            <mat-hint>
+              <span [hidden]="!(formErrors.comment)">
+                {{formErrors.comment}}</span>
+            </mat-hint>
           </mat-input-container>
         </p>
         <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
