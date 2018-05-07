@@ -17,7 +17,8 @@ import {  MatButtonModule,
           MatCardModule, 
           MatIconModule, 
           MatProgressSpinnerModule, 
-          MatDialogModule 
+          MatDialogModule,
+          MatSliderModule
         } from '@angular/material';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
@@ -92,6 +93,7 @@ import 'hammerjs';
     MatIconModule, 
     MatProgressSpinnerModule, 
     MatDialogModule,
+    MatSliderModule,
     //FormsModule,
     //HttpModule,
     AppRoutingModule,
