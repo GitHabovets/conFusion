@@ -27,16 +27,8 @@ export class DishdetailComponent implements OnInit {
   next: number;
 
   commentForm: FormGroup;
-  feedbackForm: FormGroup;
-  feedBack: Feedback;
-  comment: Comment;
+  commentPreview: Comment;
 
-  /*formErrors = {
-    'firstname': '',
-    'lastname': '',
-    'telnum': '',
-    'email': ''
-  };*/
   formErrors = {
     'author': '',
     'comment': ''
@@ -65,19 +57,6 @@ export class DishdetailComponent implements OnInit {
     
 
     createForm(): void  {
-
-      /*this.feedbackForm = this.fb.group({
-        firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-        lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-        telnum: ['', [Validators.required, Validators.pattern] ],
-        email: ['', [Validators.required, Validators.email] ],
-        agree: false,
-        contacttype: 'None',
-        message: ''
-      });
-
-      this.feedbackForm.valueChanges
-        .subscribe(data => this.onValueChanged(data));*/
       
       this.commentForm = this.fb.group({
           author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
@@ -93,22 +72,12 @@ export class DishdetailComponent implements OnInit {
   }
 
   onValueChanged(data?: any) {
-    /*if (!this.feedbackForm) { return; }
-    const form = this.feedbackForm;
-    for (const field in this.formErrors) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
-        }
-      }
-    }*/
    
     if (!this.commentForm) { return; }
     const form = this.commentForm;
+
+    this.commentPreview = this.commentForm.value;
+
     for (const field in this.formErrors) {
       // clear previous error message (if any)
       this.formErrors[field] = '';
@@ -123,18 +92,12 @@ export class DishdetailComponent implements OnInit {
   }
 
   onSubmit() {
-    //this.feedBack = this.feedbackForm.value;
-    this.comment = this.commentForm.value;
-    console.log(this.comment);
-    /*this.feedbackForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: '',
-      email: '',
-      agree: false,
-      contacttype: 'None',
-      message: ''
-    });*/
+    this.commentPreview = this.commentForm.value;
+    console.log(this.commentPreview);
+
+    this.commentPreview.date = new Date().toDateString();
+    this.dish.comments.push(this.commentPreview);
+
     this.commentForm.reset({
       author: '',
       comment: '',
