@@ -21,6 +21,9 @@ import {  MatButtonModule,
           MatSliderModule
         } from '@angular/material';
 
+import { HttpModule } from '@angular/http';
+import { baseURL } from './shared/baseurl';
+
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { AppComponent } from './app.component';
@@ -29,7 +32,8 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
 
 import { DishService } from '../app/services/dish.service';
 import { PromotionService } from '../app/services/promotion.service';
-import  { LeaderService } from '../app/services/leader.service';
+import { LeaderService } from '../app/services/leader.service';
+import { ProcessHttpMsgService } from '../app/services/process-httpmsg.service';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -95,13 +99,17 @@ import 'hammerjs';
     MatDialogModule,
     MatSliderModule,
     //FormsModule,
-    //HttpModule,
+    HttpModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule
   ],
   entryComponents: [LoginComponent],
-  providers: [DishService, PromotionService, LeaderService],
+  providers: [DishService, 
+              PromotionService, 
+              LeaderService,
+              {provide: 'BaseURL', useValue: baseURL},
+              ProcessHttpMsgService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
