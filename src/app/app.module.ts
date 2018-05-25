@@ -45,6 +45,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
+
 /*
 As per https://github.com/angular/material2/blob/master/guides/getting-started.md,
 Step 5: Gesture Support
@@ -102,7 +105,8 @@ import 'hammerjs';
     HttpModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
   entryComponents: [LoginComponent],
   providers: [DishService, 
