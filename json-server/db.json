@@ -39,6 +39,12 @@
           "comment": "It's your birthday, we're gonna party!",
           "author": "25 Cent",
           "date": "2011-12-02T17:57:28.556094Z"
+        },
+        {
+          "author": "John Doe",
+          "comment": "Good dish.",
+          "rating": 3,
+          "date": "Fri May 25 2018"
         }
       ]
     },
