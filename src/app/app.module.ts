@@ -66,6 +66,7 @@ After installing, import it on your app's entry point (e.g. src/main.ts).
 import 'hammerjs';
 */
 import 'hammerjs';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import 'hammerjs';
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
