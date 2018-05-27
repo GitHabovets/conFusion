@@ -34,6 +34,7 @@ import { DishService } from '../app/services/dish.service';
 import { PromotionService } from '../app/services/promotion.service';
 import { LeaderService } from '../app/services/leader.service';
 import { ProcessHttpMsgService } from '../app/services/process-httpmsg.service';
+import { FeedbackService } from '../app/services/feedback.service';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -115,7 +116,8 @@ import { HighlightDirective } from './directives/highlight.directive';
               PromotionService, 
               LeaderService,
               {provide: 'BaseURL', useValue: baseURL},
-              ProcessHttpMsgService],
+              ProcessHttpMsgService,
+              FeedbackService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
