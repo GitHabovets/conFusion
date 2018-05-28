@@ -26,7 +26,7 @@ export class ContactComponent implements OnInit {
   feedback: Feedback;
   contactType = ContactType;
   errMess: string;
-  waitForResponse: string;
+  displaySpinner: boolean;
 
   formErrors = {
     'firstname': '',
@@ -63,6 +63,7 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.displaySpinner = false;
   }
 
   createForm(): void  {
@@ -99,12 +100,12 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.waitForResponse = "Yes";
+    this.displaySpinner = true;
     this.feedback = this.feedbackForm.value;
 
-    this.feedBackService.submitFeedback(this.feedback).subscribe( this.onSuccess,
-                                                                  this.onError,
-                                                                  this.onComplete);
+    this.feedBackService.submitFeedback(this.feedback).subscribe( (response) => {this.onSuccess(response)},
+                                                                  () => {},
+                                                                  () => {this.onComplete()});
 
     this.feedbackForm.reset({
       firstname: '',
@@ -124,14 +125,15 @@ export class ContactComponent implements OnInit {
   }
 
   onComplete() {
-    this.waitForResponse = "";
-    console.log('onComplete');
+    //this.displaySpinner = false
+    console.log(this.displaySpinner);
   }
 
   onSuccess(response) {
     //this.processHttpMsgService.extractData(response);
-    this.waitForResponse = "";
-    console.log(response);
+    this.displaySpinner = false;
+    console.log('onSuccess');
+    console.log(response);    
   }
 
 }
