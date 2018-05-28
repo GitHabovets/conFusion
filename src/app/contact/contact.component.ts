@@ -110,6 +110,18 @@ export class ContactComponent implements OnInit {
 
     this.feedBackService.submitFeedback(this.feedback).subscribe( (response) => {this.onSuccess(response)},
                                                                   (error) => {this.onError(error)});
+  }
+
+  onError(error) {
+    this.errMess = error.message ? error.message : error.toString();
+    console.log(this.errMess);
+  }
+
+  onSuccess(response) {   
+    this.submittingRequest = false;
+    this.feedbackResponse = response;
+    this.displayFBResponse = true;
+    setTimeout( () => {this.displayFBResponse = false;}, 5000);
 
     this.feedbackForm.reset({
       firstname: '',
@@ -120,18 +132,6 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
-  }
-
-  onError(error) {
-    this.errMess = error.message ? error.message : error.toString();
-    console.log(this.errMess);
-  }
-
-  onSuccess(response) {
-    this.submittingRequest = false;
-    this.feedbackResponse = response;
-    this.displayFBResponse = true;
-    setTimeout( () => {this.displayFBResponse = false;}, 5000);
   }
 
 }
