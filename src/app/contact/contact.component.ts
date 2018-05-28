@@ -6,7 +6,7 @@ import { flyInOut, expand } from '../animations/app.animation';
 
 import { FeedbackService } from '../services/feedback.service';
 import { ProcessHttpMsgService } from '../services/process-httpmsg.service';
-import { setTimeout } from 'timers';
+//import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-contact',
