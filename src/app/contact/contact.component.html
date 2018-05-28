@@ -39,9 +39,19 @@
       <div fxFlex fxFlexOffset="20px" class="form-size">
         <h3>Send us your Feedback</h3>
         <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
-        <p>Display Spinner: {{ displaySpinner }}</p>
 
-        <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <div [hidden]="!displayFBResponse || errMess" [@expand]='expand'>
+          <h3>Your Submission</h3>
+          <p>First Name: {{feedbackResponse.firstname}}</p>
+          <p>Last Name: {{feedbackResponse.lastname}}</p>          
+          <p>Tel. Number: {{feedbackResponse.telnum}}</p>        
+          <p>Email: {{feedbackResponse.email}}</p>        
+          <p>Contact You? {{feedbackResponse.agree}}</p>        
+          <p>How?: {{feedbackResponse.contacttype}}</p>        
+          <p>Feedback: {{feedbackResponse.message}}</p>
+        </div>
+
+        <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" [hidden]="submittingRequest || displayFBResponse || errMess">
           <p>
             <mat-input-container class="half-width"
              dividerColor="{{(formErrors.firstname) ? 'warn' : 'primary'}}">
@@ -82,13 +92,13 @@
             <td>
             <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
             </td>
-            <!--<td>
+            <td>
             <mat-select placeholder="How?" formControlName="contacttype">
               <mat-option *ngFor="let ctype of contactType" [value]="ctype">
                 {{ ctype }}
               </mat-option>
             </mat-select>
-            </td>-->
+            </td>
             </table>
           <p>
             <mat-input-container class="full-width">
@@ -98,8 +108,9 @@
           <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
         </form>
       
-        <div [hidden]="displaySpinner==false || errMess">
-          <mat-spinner></mat-spinner><h4>Submitting . . . Please Wait</h4>
+        <div [hidden]="!submittingRequest || errMess">
+            <h4>Submitting . . . Please Wait</h4>
+            <mat-spinner></mat-spinner>
         </div>  
         <div *ngIf="errMess">
           <h2>Error</h2>

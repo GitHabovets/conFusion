@@ -6,6 +6,7 @@ import { flyInOut, expand } from '../animations/app.animation';
 
 import { FeedbackService } from '../services/feedback.service';
 import { ProcessHttpMsgService } from '../services/process-httpmsg.service';
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-contact',
@@ -26,7 +27,9 @@ export class ContactComponent implements OnInit {
   feedback: Feedback;
   contactType = ContactType;
   errMess: string;
-  displaySpinner: boolean;
+  submittingRequest: boolean;
+  feedbackResponse: Feedback;
+  displayFBResponse: boolean;
 
   formErrors = {
     'firstname': '',
@@ -63,7 +66,9 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.displaySpinner = false;
+    this.submittingRequest = false;
+    this.feedbackResponse = new Feedback;
+    this.displayFBResponse = false;
   }
 
   createForm(): void  {
@@ -100,12 +105,11 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.displaySpinner = true;
+    this.submittingRequest = true;
     this.feedback = this.feedbackForm.value;
 
     this.feedBackService.submitFeedback(this.feedback).subscribe( (response) => {this.onSuccess(response)},
-                                                                  () => {},
-                                                                  () => {this.onComplete()});
+                                                                  (error) => {this.onError(error)});
 
     this.feedbackForm.reset({
       firstname: '',
@@ -119,21 +123,15 @@ export class ContactComponent implements OnInit {
   }
 
   onError(error) {
-    //this.processHttpMsgService.handleError(error);
-    this.errMess = error.json();
-    console.log(error);
-  }
-
-  onComplete() {
-    //this.displaySpinner = false
-    console.log(this.displaySpinner);
+    this.errMess = error.message ? error.message : error.toString();
+    console.log(this.errMess);
   }
 
   onSuccess(response) {
-    //this.processHttpMsgService.extractData(response);
-    this.displaySpinner = false;
-    console.log('onSuccess');
-    console.log(response);    
+    this.submittingRequest = false;
+    this.feedbackResponse = response;
+    this.displayFBResponse = true;
+    setTimeout( () => {this.displayFBResponse = false;}, 5000);
   }
 
 }
