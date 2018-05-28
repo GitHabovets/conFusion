@@ -5,6 +5,7 @@ import { Feedback, ContactType } from '../shared/feedback';
 import { flyInOut, expand } from '../animations/app.animation';
 
 import { FeedbackService } from '../services/feedback.service';
+import { ProcessHttpMsgService } from '../services/process-httpmsg.service';
 
 @Component({
   selector: 'app-contact',
@@ -24,6 +25,8 @@ export class ContactComponent implements OnInit {
   feedbackForm: FormGroup;
   feedback: Feedback;
   contactType = ContactType;
+  errMess: string;
+  waitForResponse: string;
 
   formErrors = {
     'firstname': '',
@@ -54,7 +57,8 @@ export class ContactComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder,
-              private feedBackService: FeedbackService) {
+              private feedBackService: FeedbackService,
+              private processHttpMsgService: ProcessHttpMsgService) {
     this.createForm();
   }
 
@@ -95,12 +99,13 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.waitForResponse = "Yes";
     this.feedback = this.feedbackForm.value;
 
-    /*this.feedBackService.submitFeedback(this.feedback).subscribe( (success) => {console.log(success)},
-                                                                  (error) => {console.log(error)});*/
+    this.feedBackService.submitFeedback(this.feedback).subscribe( this.onSuccess,
+                                                                  this.onError,
+                                                                  this.onComplete);
 
-    console.log(this.feedback);
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -110,6 +115,23 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
+  }
+
+  onError(error) {
+    //this.processHttpMsgService.handleError(error);
+    this.errMess = error.json();
+    console.log(error);
+  }
+
+  onComplete() {
+    this.waitForResponse = "";
+    console.log('onComplete');
+  }
+
+  onSuccess(response) {
+    //this.processHttpMsgService.extractData(response);
+    this.waitForResponse = "";
+    console.log(response);
   }
 
 }
